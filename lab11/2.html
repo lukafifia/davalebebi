@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration Form</title>
+</head>
+<body>
+    <h1>Registration</h1>
+
+    <form id="registration">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+
+        <br>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+
+        <br>
+
+        <label for="idNumber">ID Number:</label>
+        <input type="text" id="idNumber" name="idNumber" required>
+
+        <br>
+
+        <label for="registrationDate">Date of Registration:</label>
+        <input type="text" id="registrationDate" name="registrationDate" readonly>
+
+        <br>
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
+
+        <br>
+
+        <button type="button" onclick="validateForm()">Submit</button>
+    </form>
+
+    <script>
+        function validateForm() {
+
+            clearErrorMessages();
+
+            validateName('firstName');
+
+            validateName('lastName');
+
+            validateIDNumber();
+
+            fillRegistrationDate();
+
+            validateEmail();
+        }
+
+        function validateName(fieldName) {
+            const input = document.getElementById(fieldName);
+            const value = input.value.trim();
+
+            if (value === '') {
+                displayError(fieldName, 'Field cannot be empty.');
+            }
+        }
+
+        function validateIDNumber() {
+            const idNumberInput = document.getElementById('idNumber');
+            const idNumber = idNumberInput.value.trim();
+
+            if (!/^\d{11}$/.test(idNumber)) {
+                displayError('idNumber', 'ID Number must consist of 11 digits.');
+            }
+        }
+
+
+        function fillRegistrationDate() {
+            const registrationDateInput = document.getElementById('registrationDate');
+            const currentDate = new Date();
+            const formattedDate = `${currentDate.getDate()}:${currentDate.getMonth() + 1}:${currentDate.getFullYear()}`;
+            registrationDateInput.value = formattedDate;
+        }
+
+        function validateEmail() {
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value.trim();
+
+            if (!email.includes('@')) {
+                displayError('email', 'Invalid email address.');
+            }
+        }
+
+        function displayError(fieldName, errorMessage) {
+            const input = document.getElementById(fieldName);
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error';
+            errorDiv.textContent = errorMessage;
+            input.parentNode.appendChild(errorDiv);
+        }
+
+        function clearErrorMessages() {
+            const errorMessages = document.getElementsByClassName('error');
+            while (errorMessages.length > 0) {
+                errorMessages[0].parentNode.removeChild(errorMessages[0]);
+            }
+        }
+    </script>
+</body>
+</html>

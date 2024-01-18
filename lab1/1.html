@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Table</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  function generateTable(width) {
+    document.write(`<table style="width: 200px; ">
+                      <tr>
+                        <th>first 1</th>
+                        <th>second 2</th>
+                      </tr>
+                      <tr>
+                        <td>Datoo 1</td>
+                        <td>Datoo 2</td>
+                      </tr>
+                    </table>`);
+  }
+
+  const tableWidth = 200;
+  generateTable(tableWidth);
+</script>
+
+</body>
+</html>

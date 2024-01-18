@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        #container {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            margin: 10vh auto;
+            background-color: #ccc;
+        }
+        #square {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            display: none;
+        }
+        button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+    <div id="square"></div>
+    </div>
+    <button onclick="moveSquare('topLeft')">Top Left</button>
+    <button onclick="moveSquare('topMid')">Top Mid</button>
+    <button onclick="moveSquare('topRight')">Top Right</button>
+    <br>
+    <button onclick="moveSquare('midLeft')">Mid Left</button>
+    <button onclick="moveSquare('center')">Center</button>
+    <button onclick="moveSquare('midRight')">Mid Right</button>
+    <br>
+    <button onclick="moveSquare('bottomLeft')">Bottom Left</button>
+    <button onclick="moveSquare('bottomMid')">Bottom Mid</button>
+    <button onclick="moveSquare('bottomRight')">Bottom Right</button>
+
+    <script>
+        let container = document.getElementById('container');
+        let square = document.getElementById('square');
+
+        function moveSquare(position) {
+            let containerRect = container.getBoundingClientRect();
+            let squareSize = square.offsetWidth;
+
+            switch (position) {
+                case 'topLeft':
+                    square.style.left = '0';
+                    square.style.top = '0';
+                    break;
+                case 'topMid':
+                    square.style.left = `${(containerRect.width - squareSize) / 2}px`;
+                    square.style.top = '0';
+                    break;
+                case 'topRight':
+                    square.style.left = `${containerRect.width - squareSize}px`;
+                    square.style.top = '0';
+                    break;
+                case 'midLeft':
+                    square.style.left = '0';
+                    square.style.top = `${(containerRect.height - squareSize) / 2}px`;
+                    break;
+                case 'center':
+                    square.style.left = `${(containerRect.width - squareSize) / 2}px`;
+                    square.style.top = `${(containerRect.height - squareSize) / 2}px`;
+                    break;
+                case 'midRight':
+                    square.style.left = `${containerRect.width - squareSize}px`;
+                    square.style.top = `${(containerRect.height - squareSize) / 2}px`;
+                    break;
+                case 'bottomLeft':
+                    square.style.left = '0';
+                    square.style.top = `${containerRect.height - squareSize}px`;
+                    break;
+                case 'bottomMid':
+                    square.style.left = `${(containerRect.width - squareSize) / 2}px`;
+                    square.style.top = `${containerRect.height - squareSize}px`;
+                    break;
+                case 'bottomRight':
+                    square.style.left = `${containerRect.width - squareSize}px`;
+                    square.style.top = `${containerRect.height - squareSize}px`;
+                    break;
+            }
+
+            square.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    #scale-container {
+      width: 400px;
+      margin: 50px auto;
+      position: relative;
+    }
+
+    #scale {
+      width: 100%;
+      height: 20px;
+      background-color: #ccc;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    #mark {
+      width: 20px;
+      height: 40px;
+      background-color: blue;
+      position: absolute;
+      top: 50%;
+      transform-origin: center bottom;
+      transform: translateY(-50%) translateX(-50%);
+    }
+  </style>
+  <title>Scale with Moving Mark</title>
+</head>
+<body>
+  <div id="scale-container">
+    <div id="scale"></div>
+    <div id="mark"></div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const scale = document.getElementById('scale');
+      const mark = document.getElementById('mark');
+
+      const scaleWidth = scale.offsetWidth;
+      const markWidth = mark.offsetWidth;
+
+      document.addEventListener('mousemove', function (event) {
+
+        const mouseX = event.clientX;
+        const scaleLeft = scale.getBoundingClientRect().left;
+        const markPosition = Math.min(scaleWidth - markWidth, Math.max(0, mouseX - scaleLeft));
+
+
+        mark.style.left = markPosition + 'px';
+      });
+    });
+  </script>
+</body>
+</html>

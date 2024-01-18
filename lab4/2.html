@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Number Buttons</title>
+  <style>
+    #numberButtons {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    button {
+      margin: 5px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #3498db;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div id="numberButtons"></div>
+
+  <script>
+    function generateRandomNumbers(a, b) {
+      const numbers = [];
+      for (let i = 0; i < 30; i++) {
+        const randomNumber = Math.floor(Math.random() * (b - a + 1)) + a;
+        numbers.push(randomNumber);
+      }
+      return numbers;
+    }
+
+    function createButtonsInDiv(divId, numbers) {
+      const div = document.getElementById(divId);
+      div.innerHTML = '';
+
+      numbers.forEach(number => {
+        const button = document.createElement('button');
+        button.textContent = number;
+        button.onclick = function() {
+          alert(`Button ${number} clicked!`);
+        };
+        div.appendChild(button);
+      });
+    }
+
+   
+    const generatedNumbers = generateRandomNumbers(1, 100);
+    createButtonsInDiv('numberButtons', generatedNumbers);
+  </script>
+</body>
+</html>

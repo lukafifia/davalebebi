@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Character Occurrences Counter</title>
+</head>
+<body>
+
+<script>
+  function countCharacterOccurrences(str, charToCount) {
+    const occurrences = (str.match(new RegExp(charToCount, 'g')) || []).length;
+    return occurrences;
+  }
+
+  
+  const myString = "JavaScript is awesome and has many features!";
+  const charToCount = 'a';
+  const count = countCharacterOccurrences(myString, charToCount);
+
+  document.write(`<p>The character '${charToCount}' appears ${count} times in the string.</p>`);
+</script>
+
+</body>
+</html>

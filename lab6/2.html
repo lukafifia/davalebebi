@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Georgian Calendar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <div id="calendar-container"></div>
+
+  <script>
+    function generateCalendar() {
+      const calendarContainer = document.getElementById('calendar-container');
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = today.getMonth();
+
+      // Georgian month names
+      const monthNames = [
+        'იანვარი', 'თებერვალი', 'მარტი', 'აპრილი', 'მაისი', 'ივნისი',
+        'ივლისი', 'აგვისტო', 'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'
+      ];
+
+      // Get the first day of the month
+      const firstDayOfMonth = new Date(year, month, 1);
+      const firstDayOfWeek = firstDayOfMonth.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+
+      // Get the number of days in the month
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      // Create the table structure
+      const table = document.createElement('table');
+      const thead = document.createElement('thead');
+      const tbody = document.createElement('tbody');
+
+      // Create the header row with month name
+      const headerRow = document.createElement('tr');
+      const monthCell = document.createElement('th');
+      monthCell.colSpan = 7;
+      monthCell.textContent = `${monthNames[month]} ${year}`;
+      headerRow.appendChild(monthCell);
+      thead.appendChild(headerRow);
+
+      // Create the weekdays row
+      const weekdaysRow = document.createElement('tr');
+      const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      for (const weekday of weekdays) {
+        const weekdayCell = document.createElement('th');
+        weekdayCell.textContent = weekday;
+        weekdaysRow.appendChild(weekdayCell);
+      }
+      thead.appendChild(weekdaysRow);
+
+
+      let day = 1;
+      for (let i = 0; i < 6; i++) { 
+        const weekRow = document.createElement('tr');
+        for (let j = 0; j < 7; j++) {
+          const dayCell = document.createElement('td');
+          if ((i === 0 && j < firstDayOfWeek) || day > daysInMonth) {
+
+            dayCell.textContent = '';
+          } else {
+            dayCell.textContent = day;
+            day++;
+          }
+          weekRow.appendChild(dayCell);
+        }
+        tbody.appendChild(weekRow);
+        if (day > daysInMonth) {
+          break;
+        }
+      }
+
+      table.appendChild(thead);
+      table.appendChild(tbody);
+      calendarContainer.innerHTML = ''; 
+      calendarContainer.appendChild(table);
+    }
+
+    document.addEventListener('DOMContentLoaded', generateCalendar);
+  </script>
+</body>
+</html>

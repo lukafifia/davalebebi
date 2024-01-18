@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+
+    input, button {
+      margin: 5px;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Simple Calculator</h1>
+  <label for="num1">Number 1:</label>
+  <input type="text" id="num1">
+  <br>
+  <label for="num2">Number 2:</label>
+  <input type="text" id="num2">
+  <br>
+  <button onclick="add()">Addition (+)</button>
+  <button onclick="subtract()">Subtraction (-)</button>
+  <button onclick="multiply()">Multiplication (*)</button>
+  <button onclick="divide()">Division (/)</button>
+  <button onclick="sqrt()">Square Root (√)</button>
+  <button onclick="sort()">Sort</button>
+  <br>
+  <p id="result"></p>
+
+  <script>
+    function getInputValues() {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const num2 = parseFloat(document.getElementById('num2').value);
+      return [num1, num2];
+    }
+
+    function setResult(result) {
+      document.getElementById('result').textContent = `Result: ${result}`;
+    }
+
+    function add() {
+      const [num1, num2] = getInputValues();
+      setResult(num1 + num2);
+    }
+
+    function subtract() {
+      const [num1, num2] = getInputValues();
+      setResult(num1 - num2);
+    }
+
+    function multiply() {
+      const [num1, num2] = getInputValues();
+      setResult(num1 * num2);
+    }
+
+    function divide() {
+      const [num1, num2] = getInputValues();
+      if (num2 !== 0) {
+        setResult(num1 / num2);
+      } else {
+        setResult('Cannot divide by zero');
+      }
+    }
+
+    function sqrt() {
+      const [num1] = getInputValues();
+      if (num1 >= 0) {
+        setResult(Math.sqrt(num1));
+      } else {
+        setResult('Cannot calculate square root of a negative number');
+      }
+    }
+
+    function sort() {
+      const [num1, num2] = getInputValues();
+      setResult([num1, num2].sort((a, b) => a - b));
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        function generateRandomStringFromFloat(n) {
+  if (typeof n !== 'number' || n <= 0) {
+    return 'Invalid input. Please provide a positive number.';
+  }
+
+  const randomFloat = Math.random();
+  const floatString = randomFloat.toString();
+
+  return floatString.slice(2, n + 2);
+}
+
+ 
+const result = generateRandomStringFromFloat(8);
+console.log(result);
+
+    </script>
+</body>
+</html>

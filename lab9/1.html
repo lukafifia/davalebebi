@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    #square-container {
+      width: 400px;
+      height: 400px;
+      position: relative;
+      margin: 50px auto;
+      border: 2px solid #333;
+    }
+
+    #moving-square {
+      width: 50px;
+      height: 50px;
+      background-color: green;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+  <title>Moving Square with Keyboard</title>
+</head>
+<body>
+  <div id="square-container">
+    <div id="moving-square"></div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const squareContainer = document.getElementById('square-container');
+      const movingSquare = document.getElementById('moving-square');
+
+      const squareSize = 400;
+      const squareStep = 10;
+
+      function handleKeyPress(event) {
+        const currentTop = parseInt(movingSquare.style.top) || 0;
+        const currentLeft = parseInt(movingSquare.style.left) || 0;
+
+        switch (event.key) {
+          case 'ArrowUp':
+            if (currentTop >= squareStep) {
+              movingSquare.style.top = currentTop - squareStep + 'px';
+            }
+            break;
+          case 'ArrowDown':
+            if (currentTop <= squareSize - squareStep - movingSquare.clientHeight) {
+              movingSquare.style.top = currentTop + squareStep + 'px';
+            }
+            break;
+          case 'ArrowLeft':
+            if (currentLeft >= squareStep) {
+              movingSquare.style.left = currentLeft - squareStep + 'px';
+            }
+            break;
+          case 'ArrowRight':
+            if (currentLeft <= squareSize - squareStep - movingSquare.clientWidth) {
+              movingSquare.style.left = currentLeft + squareStep + 'px';
+            }
+            break;
+        }
+      }
+
+      document.addEventListener('keydown', handleKeyPress);
+    });
+  </script>
+</body>
+</html>

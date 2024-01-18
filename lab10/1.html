@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colorful Squares</title>
+  <style>
+    canvas {
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="colorCanvas" width="500" height="600"></canvas>
+
+  <script>
+
+    function getRandomColor() {
+      const colors = ['green', 'blue', 'red', 'yellow'];
+      const randomIndex = Math.floor(Math.random() * colors.length);
+      return colors[randomIndex];
+    }
+
+    function drawColoredSquare(context, x, y, size, color) {
+      context.fillStyle = color;
+      context.fillRect(x, y, size, size);
+    }
+
+    function fillCanvas() {
+      const canvas = document.getElementById('colorCanvas');
+      const context = canvas.getContext('2d');
+      const squareSize = 20;
+
+      for (let x = 0; x < canvas.width; x += squareSize) {
+        for (let y = 0; y < canvas.height; y += squareSize) {
+          const color = getRandomColor();
+          drawColoredSquare(context, x, y, squareSize, color);
+        }
+      }
+    }
+
+    fillCanvas();
+  </script>
+</body>
+</html>

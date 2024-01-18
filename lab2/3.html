@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Photo Table</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+    }
+
+    img {
+      max-width: 50%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  function getRandomPhotoUrl() {
+    
+    const photoUrls = [
+      'qwe.jpg',
+      'qwert.png',
+      
+    ];
+
+    const randomIndex = Math.floor(Math.random() * photoUrls.length);
+    return photoUrls[randomIndex];
+  }
+
+  function generatePhotoTable() {
+    const table = document.createElement('table');
+
+    for (let i = 0; i < 3; i++) {
+      const row = table.insertRow();
+
+      for (let j = 0; j < 4; j++) {
+        const cell = row.insertCell();
+        const img = document.createElement('img');
+        img.src = getRandomPhotoUrl();
+        cell.appendChild(img);
+      }
+    }
+
+    document.body.appendChild(table);
+  }
+
+  generatePhotoTable();
+</script>
+
+</body>
+</html>

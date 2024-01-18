@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Odd Number Generator</title>
+</head>
+<body>
+    <h1>Random Odd Number Generator</h1>
+
+    <form id="numberForm">
+        <label for="numCount">Number of Odd Numbers (n): </label>
+        <input type="number" id="numCount" name="numCount" required min="1">
+
+        <br>
+
+        <label for="lowerLimit">Lower Limit (k): </label>
+        <input type="number" id="lowerLimit" name="lowerLimit" required>
+
+        <br>
+
+        <label for="upperLimit">Upper Limit (p): </label>
+        <input type="number" id="upperLimit" name="upperLimit" required>
+
+        <br>
+
+        <button type="button" onclick="generateRandomNumbers()">Generate Numbers</button>
+    </form>
+
+    <h2>Generated Odd Numbers:</h2>
+    <div id="result"></div>
+
+    <script>
+        function generateRandomNumbers() {
+
+            const numCount = parseInt(document.getElementById('numCount').value, 10);
+            const lowerLimit = parseInt(document.getElementById('lowerLimit').value, 10);
+            const upperLimit = parseInt(document.getElementById('upperLimit').value, 10);
+
+            if (isNaN(numCount) || isNaN(lowerLimit) || isNaN(upperLimit) || lowerLimit > upperLimit) {
+                alert('Please enter valid input.');
+                return;
+            }
+
+            const oddNumbers = [];
+            while (oddNumbers.length < numCount) {
+                const randomNumber = Math.floor(Math.random() * (upperLimit - lowerLimit + 1)) + lowerLimit;
+                if (randomNumber % 2 !== 0) {
+                    oddNumbers.push(randomNumber);
+                }
+            }
+
+            const resultContainer = document.getElementById('result');
+            resultContainer.textContent = oddNumbers.join(', ');
+        }
+    </script>
+</body>
+</html>
